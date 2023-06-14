@@ -10,7 +10,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const r = await client.execute(`select * from beta;`)
+  const r = await client.execute(`select 1;`)
 
   return (
     <html lang="en">
