@@ -1,10 +1,17 @@
 import './globals.css'
+import { createClient } from '@libsql/client'
 
-export default function RootLayout({
+const client = createClient({
+  url: 'libsql://test.turso.io',
+})
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const r = await client.execute(`select * from beta;`)
+
   return (
     <html lang="en">
       {/*
@@ -12,7 +19,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>{JSON.stringify(r)} {children}</body>
     </html>
   )
 }
